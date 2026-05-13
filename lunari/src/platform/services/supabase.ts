@@ -50,7 +50,7 @@ export async function dbSelect<T>(
   const client = getSupabaseClient()
   let query = client.from(table).select('*')
   for (const [key, value] of Object.entries(filters)) {
-    query = query.eq(key, value)
+    query = query.eq(key, value as string)
   }
   const { data, error } = await query
   if (error) throw new Error(`DB select error on ${table}: ${error.message}`)
